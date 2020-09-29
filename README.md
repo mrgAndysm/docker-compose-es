@@ -22,3 +22,5 @@
     └── docker-compose.yml
 
 ## 可横向扩容
+
+欢迎提交issue，作者会私下联系你
