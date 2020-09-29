@@ -1,0 +1,41 @@
+version: '2.0'
+services:
+    elasticsearch-central:
+        image: registry.cn-hangzhou.aliyuncs.com/ys_php/hb-es:last
+        container_name: es1
+        volumes:
+           - /opt/htdocs/elasticsearch/node/es1/data:/usr/share/elasticsearch/data 
+           - /opt/htdocs/elasticsearch/node/es1/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+        environment:
+           - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+           - ES_CLUSTERNAME=elasticsearch
+        command: elasticsearch
+        ports:
+           - "9200:9200"
+           - "9300:9300"
+    elasticsearch-data:
+        image: registry.cn-hangzhou.aliyuncs.com/ys_php/hb-es:last
+        container_name: es2
+        volumes:
+           - /opt/htdocs/elasticsearch/node/es2/data:/usr/share/elasticsearch/data
+           - /opt/htdocs/elasticsearch/node/es2/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+        environment:
+           - bootstrap.memory_lock=true
+           - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+           - ES_CLUSTERNAME=elasticsearch
+        command: elasticsearch
+        ports:
+           - "9201:9200"
+           - "9301:9300"
+        links:
+           - elasticsearch-central:elasticsearch
+    elasticsearch-head:
+        image: registry.cn-hangzhou.aliyuncs.com/ys_php/hb-head-es:last
+        container_name: head
+        volumes:
+           - /opt/htdocs/elasticsearch/head/Gruntfile.js:/usr/src/app/Gruntfile.js
+           - /opt/htdocs/elasticsearch/head/_site/app.js:/usr/src/app/_site/app.js        
+        ports:
+           - "9100:9100"           
+        links:
+           - elasticsearch-central:elasticsearch
