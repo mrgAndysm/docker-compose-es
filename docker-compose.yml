@@ -4,8 +4,8 @@ services:
         image: registry.cn-hangzhou.aliyuncs.com/ys_php/hb-es:last
         container_name: es1
         volumes:
-        - /opt/htdocs/elasticsearch/node/es1/data:/usr/share/elasticsearch/data
-        - /opt/htdocs/elasticsearch/node/es1/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+        - /alidata/www/stage/tools/node/es1/data:/usr/share/elasticsearch/data
+        - /alidata/www/stage/tools/node/es1/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
         environment:
         - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
         - ES_CLUSTERNAME=elasticsearch
@@ -19,8 +19,8 @@ services:
         image: registry.cn-hangzhou.aliyuncs.com/ys_php/hb-es:last
         container_name: es2
         volumes:
-        - /opt/htdocs/elasticsearch/node/es2/data:/usr/share/elasticsearch/data
-        - /opt/htdocs/elasticsearch/node/es2/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+        - /alidata/www/stage/tools/node/es2/data:/usr/share/elasticsearch/data
+        - /alidata/www/stage/tools/node/es2/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
         environment:
         - bootstrap.memory_lock=true
         - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -35,8 +35,8 @@ services:
         image: registry.cn-hangzhou.aliyuncs.com/ys_php/hb-head-es:last
         container_name: head
         volumes:
-        - /opt/htdocs/elasticsearch/head/Gruntfile.js:/usr/src/app/Gruntfile.js
-        - /opt/htdocs/elasticsearch/head/_site/app.js:/usr/src/app/_site/app.js
+        - /alidata/www/stage/tools/head/Gruntfile.js:/usr/src/app/Gruntfile.js
+        - /alidata/www/stage/tools/head/_site/app.js:/usr/src/app/_site/app.js
         ports:
         - "9100:9100"
         networks:
